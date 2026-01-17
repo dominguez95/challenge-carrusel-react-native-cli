@@ -1,5 +1,7 @@
 import axios from 'axios';
+import { logout } from '../../presentation/redux/authSlice';
 import { store } from '../../store';
+import { decodeToken, isTokenExpired } from '../utils/jwt';
 
 export const api = axios.create({
   baseURL: process.env.API_BASE_URL || 'http://localhost:3000/api',
@@ -11,8 +13,17 @@ export const api = axios.create({
 
 api.interceptors.request.use(
   config => {
-    const { token } = store.getState().auth;
+    const state = store.getState();
+    const token = state.auth.token;
+
     if (token) {
+      const decoded = decodeToken(token);
+
+      if (isTokenExpired(decoded.exp)) {
+        store.dispatch(logout());
+        throw new Error('Token expirado');
+      }
+
       config.headers.Authorization = `Bearer ${token}`;
     }
     return config;

@@ -1,21 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { persistStore, persistReducer } from 'redux-persist';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import authReducer from '../presentation/redux/authSlice';
-import carruselReducer from '../presentation/redux/carruselSlice';
-
-const persistConfig = {
-  key: 'auth',
-  storage: AsyncStorage,
-};
-
-const persistedAuthReducer = persistReducer(persistConfig, authReducer);
+import { persistStore } from 'redux-persist';
+import { rootReducer } from './rootReducer';
 
 export const store = configureStore({
-  reducer: {
-    auth: persistedAuthReducer,
-    carrusels: carruselReducer,
-  },
+  reducer: rootReducer,
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: false,
