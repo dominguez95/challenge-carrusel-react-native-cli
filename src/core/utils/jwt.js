@@ -1,6 +1,6 @@
-import jwtDecode from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 // Decodes a JWT token and returns its payload
-export const decodeTonken = token => {
+export const decodeToken = token => {
   if (!token) return null;
   return jwtDecode(token);
 };

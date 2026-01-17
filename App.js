@@ -1,6 +1,9 @@
 import { StatusBar, useColorScheme } from 'react-native';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+
+import { persistor, store } from './src/app/store';
 import Navigation from './src/app/navigation';
 
 function App() {

@@ -1,5 +1,5 @@
+import { api } from '../../core/api/axiosClient';
 import { CarruselRepository } from '../../domain/repositories/carrusels';
-import { api } from '../api/apiClient';
 
 export class CarruselRepositoryImpl extends CarruselRepository {
   async getCarrusels() {

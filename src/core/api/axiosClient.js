@@ -1,6 +1,6 @@
 import axios from 'axios';
+import { store } from '../../app/store';
 import { logout } from '../../presentation/redux/authSlice';
-import { store } from '../../store';
 import { decodeToken, isTokenExpired } from '../utils/jwt';
 
 export const api = axios.create({
@@ -19,7 +19,7 @@ api.interceptors.request.use(
     if (token) {
       const decoded = decodeToken(token);
 
-      if (isTokenExpired(decoded.exp)) {
+      if (isTokenExpired(decoded.expireDate)) {
         store.dispatch(logout());
         throw new Error('Token expirado');
       }

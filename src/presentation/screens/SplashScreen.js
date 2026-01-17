@@ -5,20 +5,25 @@ import { fetchToken } from '../redux/authSlice';
 import { decodeToken, isTokenExpired } from '../../core/utils/jwt';
 
 export default function SplashScreen({ navigation }) {
-  const distpatch = useDispatch();
+  const dispatch = useDispatch();
   const { token } = useSelector(state => state.auth);
 
   useEffect(() => {
     const initAuth = async () => {
-      if (!token) {
-        await distpatch(fetchToken());
-        navigation.replace('Home');
-      } else {
-        const decoded = decodeToken(token);
-        if (isTokenExpired(decoded)) {
-          await distpatch(fetchToken());
+      try {
+        if (!token) {
+          await dispatch(fetchToken()).unwrap();
+          navigation.replace('Home');
+        } else {
+          const decoded = decodeToken(token);
+
+          if (isTokenExpired(decoded.expireDate)) {
+            await dispatch(fetchToken()).unwrap();
+          }
+          navigation.replace('Home');
         }
-        navigation.replace('Home');
+      } catch (error) {
+        console.log(error);
       }
     };
     initAuth();

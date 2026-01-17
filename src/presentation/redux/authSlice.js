@@ -1,22 +1,26 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AuthService } from '../../infrastructure/services/authServices';
 import { getToken } from '../../domain/useCases/getToken';
-import { decodeTonken } from '../../core/utils/jwt';
+import { decodeToken, isTokenExpired } from '../../core/utils/jwt';
 
 const authSerivce = new AuthService();
 
 export const fetchToken = createAsyncThunk(
   'auth/fetchToken',
-  async (_, { dispatch }) => {
-    const data = await getToken(authSerivce);
-    const decoded = decodeTonken(data.token);
-    if (isTokenExpired(decoded.exp)) {
-      return rejectWithValue('Token expirado');
+  async (_, { rejectWithValue }) => {
+    try {
+      const data = await getToken(authSerivce);
+      const decoded = decodeToken(data.token);
+      if (isTokenExpired(decoded.expireDate)) {
+        return rejectWithValue('Token expirado');
+      }
+      return {
+        token: data.token,
+        expiresAt: decoded.expireDate,
+      };
+    } catch (error) {
+      return rejectWithValue(error.message);
     }
-    return {
-      token: data.token,
-      expiresAt: decoded.exp,
-    };
   },
 );
 
@@ -42,6 +46,10 @@ const authSlice = createSlice({
         state.token = action.payload.token;
         state.expiresAt = action.payload.expiresAt;
         state.loading = false;
+      })
+      .addCase(fetchToken.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
       });
   },
 });
