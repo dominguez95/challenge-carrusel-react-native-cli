@@ -62,12 +62,12 @@ cd android && ./gradlew clean && cd ..
 # iOS
 npx react-native run-ios
 # o
-yarn ios
+yarn react-native run-ios
 
 # Android
-npm react-native run-android
+npx react-native run-android
 # o
-yarn android
+yarn react-native run-android
 ```
 
 ---
