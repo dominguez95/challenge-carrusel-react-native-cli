@@ -30,8 +30,8 @@ cp .env.example .env
 Edita el archivo `.env` con los siguientes valores:
 
 ```env
-API_BASE_URL=https://example.com/v1
-MI_CODIGO_ACCESO=access_code_here
+API_BASE_URL=https://echo-serv.tbxnet.com/v1
+MI_CODIGO_ACCESO=ToolboxMobileTest
 ```
 
 ### Paso 3: Instalar dependencias
@@ -121,13 +121,18 @@ yarn test
 
 ## 📝 Notas y Puntos de Mejora
 
-1. **Imágenes:** No se utilizó la imagen de la API ya que la URL no existe. Se usó imágenes de [Lorem Picsum](https://picsum.photos/) como alternativa.
+1. **Splash Screen y Autenticación:** La aplicación inicia con un **Splash Screen** sin requerir ningún tipo de formulario de login. El flujo de autenticación funciona de la siguiente manera:
 
-2. **Videos:** Cuando un registro no tiene video asociado, se navega a la pantalla de descripción. Si tiene video, se muestra en orientación horizontal (landscape).
+   - Si el **token es válido** o **no ha expirado**, la app redirige automáticamente al **Home**.
+   - Si el **token ha expirado** o no es válido, se le solicita al usuario que **recargue** para obtener un nuevo token, y posteriormente se redirige al **Home**.
 
-3. **Orientación:** Al reproducir un video la pantalla cambia a horizontal. Al presionar "back", vuelve automáticamente a portrait.
+2. **Imágenes:** No se utilizó la imagen de la API ya que la URL no existe. Se usó imágenes de [Lorem Picsum](https://picsum.photos/) como alternativa.
 
-4. **CLI:** Se utilizó el template de [@react-native-community/cli](https://github.com/react-native-community/cli) para la creación del proyecto.
+3. **Videos:** Cuando un registro no tiene video asociado, se navega a la pantalla de descripción. Si tiene video, se muestra en orientación horizontal (landscape).
+
+4. **Orientación:** Al reproducir un video la pantalla cambia a horizontal. Al presionar "back", vuelve automáticamente a portrait.
+
+5. **CLI:** Se utilizó el template de [@react-native-community/cli](https://github.com/react-native-community/cli) para la creación del proyecto.
 
 ---
 
