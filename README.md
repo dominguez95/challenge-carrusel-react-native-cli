@@ -1,97 +1,136 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Challenge Carrusel 🎠
 
-# Getting Started
+Aplicación de React Native que muestra un carrusel de contenido multimedia con soporte para imágenes y videos.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## 📋 Requisitos Previos
 
-## Step 1: Start Metro
+- Node.js >= 20
+- npm o Yarn
+- Xcode (para iOS)
+- Android Studio (para Android)
+- CocoaPods (para iOS)
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## 🚀 Instalación
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+### Paso 1: Clonar el repositorio
 
 ```sh
-# Using npm
-npm start
-
-# OR using Yarn
-yarn start
+git clone <url-del-repositorio>
+cd ChallegeCarrusel
 ```
 
-## Step 2: Build and run your app
+### Paso 2: Configurar variables de entorno
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
+Renombra el archivo `.env.example` a `.env` y configura las variables:
 
 ```sh
-# Using npm
-npm run android
+cp .env.example .env
+```
 
-# OR using Yarn
+Edita el archivo `.env` con los siguientes valores:
+
+```env
+API_BASE_URL=https://example.com/v1
+MI_CODIGO_ACCESO=access_code_here
+```
+
+### Paso 3: Instalar dependencias
+
+```sh
+# Usando npm
+npm install
+
+# O usando Yarn
+yarn install
+```
+
+#### Para iOS:
+
+```sh
+cd ios && pod install && cd ..
+```
+
+#### Para Android (solo en caso de error):
+
+```sh
+cd android && ./gradlew clean && cd ..
+```
+
+### Paso 4: Ejecutar la aplicación
+
+```sh
+# iOS
+npx react-native run-ios
+# o
+yarn ios
+
+# Android
+npm react-native run-android
+# o
 yarn android
 ```
 
-### iOS
+---
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+## 📱 Capturas de Pantalla
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+### App Preview
+
+![App Screenshot](./screenshots/app-preview.png)
+
+### Video Demo
+
+🎬 [Ver video demo](https://drive.google.com/file/d/1MLoy2-b6BUAWyRyMn2RXXz9azXTVz6i8/view?usp=sharing)
+
+---
+
+## 🛠️ Tecnologías Utilizadas
+
+- **React Native** 0.83.1 + **React** 19.2.0
+- **Redux Toolkit** + **Redux Persist** (manejo de estado)
+- **React Navigation** (navegación)
+- **Axios** (cliente HTTP)
+- **React Native Video** + **Orientation Locker** (reproducción de videos)
+- **Fast Image** (carga optimizada de imágenes)
+- **JavaScript ES6+**
+
+---
+
+## 🏗️ Arquitectura
+
+El proyecto sigue los **principios SOLID** y una **arquitectura limpia (Clean Architecture)** con separación de capas: `domain`, `infrastructure` y `presentation`. Desarrollado con **JavaScript ES6+**.
+
+---
+
+## 🧪 Testing
+
+Se implementaron tests unitarios utilizando Jest:
 
 ```sh
-bundle install
+npm test
+# o
+yarn test
 ```
 
-Then, and every time you update your native dependencies, run:
+### Tests implementados:
 
-```sh
-bundle exec pod install
-```
+- ✅ `__tests__/App.test.js` - Test general de la aplicación
+- ✅ `src/core/utils/__tests__/jwt.test.js` - Tests de funciones JWT (`decodeToken`, `isTokenExpired`)
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+---
 
-```sh
-# Using npm
-npm run ios
+## 📝 Notas y Puntos de Mejora
 
-# OR using Yarn
-yarn ios
-```
+1. **Imágenes:** No se utilizó la imagen de la API ya que la URL no existe. Se usó imágenes de [Lorem Picsum](https://picsum.photos/) como alternativa.
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+2. **Videos:** Cuando un registro no tiene video asociado, se navega a la pantalla de descripción. Si tiene video, se muestra en orientación horizontal (landscape).
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+3. **Orientación:** Al reproducir un video la pantalla cambia a horizontal. Al presionar "back", vuelve automáticamente a portrait.
 
-## Step 3: Modify your app
+4. **CLI:** Se utilizó el template de [@react-native-community/cli](https://github.com/react-native-community/cli) para la creación del proyecto.
 
-Now that you have successfully run the app, let's make changes!
+---
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+## 📄 Licencia
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+Este proyecto es parte de un challenge técnico.
