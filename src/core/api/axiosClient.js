@@ -15,7 +15,6 @@ api.interceptors.request.use(
   config => {
     const state = store.getState();
     const token = state.auth.token;
-
     if (token) {
       const decoded = decodeToken(token);
 
@@ -23,7 +22,6 @@ api.interceptors.request.use(
         store.dispatch(logout());
         throw new Error('Token expirado');
       }
-
       config.headers.Authorization = `Bearer ${token}`;
     }
     return config;

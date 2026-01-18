@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SplashScreen from '../presentation/screens/SplashScreen';
 import HomeScreen from '../presentation/screens/HomeScreen';
 import DetailsScreen from '../presentation/screens/DetailsScreen';
+import VideoScreen from '../presentation/screens/VideoScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,6 +18,11 @@ export default function Navigation() {
         <Stack.Screen name="Splash" component={SplashScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Details" component={DetailsScreen} />
+        <Stack.Screen
+          name="Video"
+          component={VideoScreen}
+          options={{ orientation: 'landscape' }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

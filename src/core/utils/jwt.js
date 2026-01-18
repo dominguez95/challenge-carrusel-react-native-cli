@@ -5,8 +5,15 @@ export const decodeToken = token => {
   return jwtDecode(token);
 };
 // Checks if the token is expired based on its 'exp' claim
-export const isTokenExpired = exp => {
-  // formmat date response:     "expireDate": "2021-09-20T17:21:18.265Z"
-  const now = Date.now() / 1000;
-  return exp < now;
+export const isTokenExpired = expireDate => {
+  const now = Date.now();
+  if (typeof expireDate === 'string') {
+    const expTime = new Date(expireDate).getTime();
+    return expTime <= now;
+  }
+  if (typeof expireDate === 'number') {
+    const expTime = expireDate * 1000;
+    return expTime <= now;
+  }
+  return true;
 };

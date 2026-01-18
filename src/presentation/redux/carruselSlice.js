@@ -6,15 +6,21 @@ const repo = new CarruselRepositoryImpl();
 
 export const fetchCarrusels = createAsyncThunk(
   'carrusel/fetchCarrusels',
-  async () => {
-    return await getCarrusels(repo);
+  async (_, { rejectWithValue }) => {
+    try {
+      const data = await getCarrusels(repo);
+      return data;
+    } catch (error) {
+      console.log('❌ Error fetchCarrusels:', error.message);
+      return rejectWithValue(error.message);
+    }
   },
 );
 
 export const carruselSlice = createSlice({
-  name: 'carrusel',
+  name: 'carrusels',
   initialState: {
-    carrusels: [],
+    data: [],
     loading: false,
     error: null,
   },
@@ -26,7 +32,9 @@ export const carruselSlice = createSlice({
       })
       .addCase(fetchCarrusels.fulfilled, (state, action) => {
         state.loading = false;
-        state.carrusels = action.payload;
+        console.log(action);
+
+        state.data = action.payload;
       })
       .addCase(fetchCarrusels.rejected, (state, action) => {
         state.loading = false;

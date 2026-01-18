@@ -5,7 +5,6 @@ export class AuthService {
     const response = await api.post('/mobile/auth', {
       sub: process.env.MI_CODIGO_ACCESO,
     });
-
     return response.data;
   }
 }
