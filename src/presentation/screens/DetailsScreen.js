@@ -18,10 +18,12 @@ export default function DetailsScreen() {
           <Text style={styles.backText}>← Volver</Text>
         </TouchableOpacity>
       </View>
-      <Poster item={data} variant="thumb" />
-      <Text style={styles.title}>{data.title}</Text>
-      <Text style={styles.description}>{data.description}</Text>
-      <Text style={styles.notAvailable}>"Video no disponible"</Text>
+      <View style={{ flex: 1, alignItems: 'center' }}>
+        <Poster item={data} variant="thumb" />
+        <Text style={styles.title}>{data.title}</Text>
+        <Text style={styles.description}>{data.description}</Text>
+        <Text style={styles.notAvailable}>"Video no disponible"</Text>
+      </View>
     </SafeAreaView>
   );
 }
